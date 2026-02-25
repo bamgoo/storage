@@ -1,6 +1,7 @@
 package storage
 
 import (
+	"fmt"
 	"sync"
 
 	"github.com/bamgoo/bamgoo"
@@ -248,6 +249,7 @@ func (m *Module) Start() {
 		return
 	}
 	m.started = true
+	fmt.Printf("bamgoo storage module is running with %d connections.\n", len(m.instances))
 }
 
 func (m *Module) Stop() {
