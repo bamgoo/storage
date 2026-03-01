@@ -8,11 +8,11 @@ import (
 	"path"
 	"sync"
 
-	"github.com/bamgoo/bamgoo"
+	"github.com/infrago/infra"
 )
 
 func init() {
-	module.RegisterDriver(bamgoo.DEFAULT, &defaultDriver{})
+	module.RegisterDriver(infra.DEFAULT, &defaultDriver{})
 }
 
 type (
@@ -58,7 +58,7 @@ func (c *defaultConnection) Upload(original string, opt UploadOption) (*File, er
 		return nil, errors.New("directory upload not supported")
 	}
 
-	ext := bamgoo.Extension(original)
+	ext := infra.Extension(original)
 	if opt.Key == "" {
 		h, hex, err := hashFile(original)
 		if err != nil {

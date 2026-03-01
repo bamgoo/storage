@@ -3,7 +3,7 @@ package storage
 import (
 	"time"
 
-	. "github.com/bamgoo/base"
+	. "github.com/infrago/base"
 )
 
 type (

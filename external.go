@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	. "github.com/bamgoo/base"
+	. "github.com/infrago/base"
 )
 
 func Upload(from Any, opts ...UploadOption) (*File, error) {

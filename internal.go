@@ -3,7 +3,7 @@ package storage
 import (
 	"errors"
 
-	"github.com/bamgoo/bamgoo"
+	"github.com/infrago/infra"
 )
 
 func (m *Module) instance(code string) (*Instance, *File, error) {
@@ -13,7 +13,7 @@ func (m *Module) instance(code string) (*Instance, *File, error) {
 	}
 	base := file.Base()
 	if base == "" {
-		base = bamgoo.DEFAULT
+		base = infra.DEFAULT
 	}
 	inst, ok := m.instances[base]
 	if !ok {
@@ -24,7 +24,7 @@ func (m *Module) instance(code string) (*Instance, *File, error) {
 
 func (m *Module) UploadTo(base string, original string, opts ...UploadOption) (*File, error) {
 	if base == "" {
-		base = bamgoo.DEFAULT
+		base = infra.DEFAULT
 	}
 	inst, ok := m.instances[base]
 	if !ok {

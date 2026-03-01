@@ -5,8 +5,8 @@ import (
 	"os"
 	"path"
 
-	"github.com/bamgoo/bamgoo"
-	. "github.com/bamgoo/base"
+	"github.com/infrago/infra"
+	. "github.com/infrago/base"
 )
 
 type (
@@ -31,7 +31,7 @@ func (i *Instance) downloadTarget(file *File) (string, error) {
 	}
 
 	base := file.Base()
-	if base == bamgoo.DEFAULT {
+	if base == infra.DEFAULT {
 		base = ""
 	}
 

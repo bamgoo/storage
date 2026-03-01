@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/bamgoo/bamgoo"
+	"github.com/infrago/infra"
 )
 
 type (
@@ -63,7 +63,7 @@ func (i *Instance) newFile(prefix, key, typee string, size int64) *File {
 
 func encodeFile(file *File) string {
 	base := file.base
-	if base == bamgoo.DEFAULT {
+	if base == infra.DEFAULT {
 		base = ""
 	}
 	raw := fmt.Sprintf("%s\t%s\t%s\t%s\t%d", base, file.prefix, file.key, file.typee, file.size)
@@ -94,7 +94,7 @@ func decodeFile(code string) (*File, error) {
 		size:   size,
 	}
 	if info.base == "" {
-		info.base = bamgoo.DEFAULT
+		info.base = infra.DEFAULT
 	}
 	if cfg, ok := module.configs[info.base]; ok {
 		info.proxy = cfg.Proxy

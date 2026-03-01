@@ -1,2 +1,2 @@
 # storage
-bamgoo storage module.
+infrago storage module.

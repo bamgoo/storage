@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/bamgoo/bamgoo"
-	. "github.com/bamgoo/base"
-	"github.com/bamgoo/util"
+	"github.com/infrago/infra"
+	. "github.com/infrago/base"
+	"github.com/infrago/util"
 )
 
 func init() {
-	bamgoo.Mount(module)
+	infra.Mount(module)
 }
 
 var module = &Module{
@@ -18,7 +18,7 @@ var module = &Module{
 		Download:  "store/download",
 		Thumbnail: "store/thumbnail",
 		Preview:   "store/preview",
-		Salt:      bamgoo.BAMGOO,
+		Salt:      infra.INFRAGO,
 	},
 	configs:   make(Configs, 0),
 	drivers:   make(map[string]Driver, 0),
@@ -75,12 +75,12 @@ func (m *Module) RegisterDriver(name string, driver Driver) {
 	m.mutex.Lock()
 	defer m.mutex.Unlock()
 	if name == "" {
-		name = bamgoo.DEFAULT
+		name = infra.DEFAULT
 	}
 	if driver == nil {
 		panic("Invalid storage driver: " + name)
 	}
-	if bamgoo.Override() {
+	if infra.Override() {
 		m.drivers[name] = driver
 	} else {
 		if _, ok := m.drivers[name]; !ok {
@@ -93,9 +93,9 @@ func (m *Module) RegisterConfig(name string, cfg Config) {
 	m.mutex.Lock()
 	defer m.mutex.Unlock()
 	if name == "" {
-		name = bamgoo.DEFAULT
+		name = infra.DEFAULT
 	}
-	if bamgoo.Override() {
+	if infra.Override() {
 		m.configs[name] = cfg
 	} else {
 		if _, ok := m.configs[name]; !ok {
@@ -150,12 +150,12 @@ func (m *Module) Config(global Map) {
 		}
 	}
 	if len(root) > 0 {
-		m.configure(bamgoo.DEFAULT, root)
+		m.configure(infra.DEFAULT, root)
 	}
 }
 
 func (m *Module) configure(name string, cfg Map) {
-	out := Config{Driver: bamgoo.DEFAULT, Weight: 1}
+	out := Config{Driver: infra.DEFAULT, Weight: 1}
 	if vv, ok := m.configs[name]; ok {
 		out = vv
 	}
@@ -196,11 +196,11 @@ func (m *Module) Setup() {
 	}
 
 	if len(m.configs) == 0 {
-		m.configs[bamgoo.DEFAULT] = Config{Driver: bamgoo.DEFAULT, Weight: 1}
+		m.configs[infra.DEFAULT] = Config{Driver: infra.DEFAULT, Weight: 1}
 	}
 	for k, v := range m.configs {
 		if v.Driver == "" {
-			v.Driver = bamgoo.DEFAULT
+			v.Driver = infra.DEFAULT
 		}
 		if v.Weight == 0 {
 			v.Weight = 1
@@ -249,7 +249,7 @@ func (m *Module) Start() {
 		return
 	}
 	m.started = true
-	fmt.Printf("bamgoo storage module is running with %d connections.\n", len(m.instances))
+	fmt.Printf("infrago storage module is running with %d connections.\n", len(m.instances))
 }
 
 func (m *Module) Stop() {
